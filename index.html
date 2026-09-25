@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>خشتەی وانەکان — ئامادەیی ئەحمەد موختار</title>
+<meta name="theme-color" content="#1F4E79">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="خشتەی وانەکان">
+<link rel="apple-touch-icon" id="touchicon">
+<link rel="icon" id="favicon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16202B; --muted:#5C6B7A; --line:#DCE3EA;
+  --paper:#FFFFFF; --wash:#F3F6F9; --brand:#1F4E79; --brand-soft:#DEEAF6;
+  --bell:#C08A22; --bell-soft:#FBF1DC; --alert:#9C0006; --alert-soft:#FFD9DC;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#E9EFF5; --muted:#9BABBB; --line:#2A3846;
+    --paper:#111A23; --wash:#18242F; --brand:#8CBBE4; --brand-soft:#1B2E42;
+    --bell:#E0B357; --bell-soft:#2A2213; --alert:#FF9AA2; --alert-soft:#3A1D20;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E9EFF5; --muted:#9BABBB; --line:#2A3846;
+  --paper:#111A23; --wash:#18242F; --brand:#8CBBE4; --brand-soft:#1B2E42;
+  --bell:#E0B357; --bell-soft:#2A2213; --alert:#FF9AA2; --alert-soft:#3A1D20;
+}
+body{
+  margin:0;background:var(--wash);color:var(--ink);
+  font-family:"Noto Naskh Arabic",serif;font-size:16px;line-height:1.7;
+}
+h1,h2,h3,.ui{font-family:"Noto Kufi Arabic",sans-serif;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px 48px}
+
+header.top{
+  position:sticky;top:0;z-index:20;background:var(--brand);color:#fff;
+  padding-top:env(safe-area-inset-top,0px);
+  box-shadow:0 1px 0 rgba(0,0,0,.12);
+}
+:root[data-theme="dark"] header.top, html header.top{}
+.top .bar{max-width:760px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.top h1{margin:0;font-size:17px;font-weight:600;color:#fff;flex:1}
+.top .sub{font-size:12px;opacity:.85;font-family:"Noto Kufi Arabic",sans-serif}
+.back{
+  appearance:none;border:0;background:rgba(255,255,255,.16);color:#fff;
+  font-family:inherit;font-size:15px;padding:6px 12px;border-radius:9px;cursor:pointer;
+}
+.back.home{background:rgba(255,255,255,.10)}
+.back:focus-visible,button:focus-visible{outline:2px solid var(--bell);outline-offset:2px}
+
+.now{
+  margin:14px 0;padding:12px 14px;border-radius:12px;
+  background:var(--bell-soft);border:1px solid var(--bell);
+}
+.now .k{font-family:"Noto Kufi Arabic",sans-serif;font-size:12px;color:var(--muted)}
+.now .v{font-family:"Noto Kufi Arabic",sans-serif;font-size:18px;font-weight:600}
+.now .t{font-size:14px;color:var(--muted)}
+
+.menu{display:grid;gap:8px;margin:14px 0}
+.menu .head{font-family:"Noto Kufi Arabic",sans-serif;font-size:13px;color:var(--muted);margin:14px 2px 2px}
+.btn{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:14px;font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;color:var(--ink);
+  cursor:pointer;text-align:right;
+}
+.btn:active{background:var(--brand-soft)}
+.btn .hint{font-size:13px;color:var(--muted);font-weight:400}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{
+  background:var(--paper);border:1px solid var(--line);border-radius:999px;
+  padding:9px 16px;font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;color:var(--ink);cursor:pointer;
+}
+.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:12px 0}
+.row{display:grid;grid-template-columns:52px 1fr;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row .n{
+  background:var(--wash);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:"Noto Kufi Arabic",sans-serif;padding:8px 4px;
+}
+.row .n b{font-size:17px;font-weight:600}
+.row .n span{font-size:10px;color:var(--muted);direction:ltr}
+.row .m{padding:9px 12px}
+.row .s{font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;font-weight:600}
+.row .who{font-size:14px;color:var(--muted)}
+.row.free .s{color:var(--muted);font-weight:400}
+.row.live{background:var(--bell-soft)}
+.row.live .n{background:var(--bell);color:#fff}
+.row.live .n span{color:rgba(255,255,255,.85)}
+
+.scroll{overflow:auto;-webkit-overflow-scrolling:touch;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;font-size:12px;min-width:100%}
+th,td{border:1px solid var(--line);padding:4px 5px;text-align:center;white-space:nowrap}
+thead th{position:sticky;top:0;background:var(--brand);color:#fff;font-family:"Noto Kufi Arabic",sans-serif;font-size:12px;z-index:3}
+tbody th{position:sticky;right:0;background:var(--brand);color:#fff;font-family:"Noto Kufi Arabic",sans-serif;z-index:2}
+td .s{font-family:"Noto Kufi Arabic",sans-serif;display:block}
+td .w{color:var(--muted);display:block;font-size:11px}
+td.hit{background:var(--bell-soft)}
+td.hit .w{color:var(--ink)}
+tr.band td{background:var(--wash)}
+tr.band td.hit{background:var(--bell-soft)}
+.clash{background:var(--alert-soft) !important;color:var(--alert) !important;font-weight:700}
+
+.search{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
+  background:var(--paper);color:var(--ink);font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;margin:12px 0;
+}
+.list{display:grid;gap:6px}
+.tname{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.star{background:none;border:0;font-size:20px;cursor:pointer;color:var(--muted);padding:4px 6px}
+.star[aria-pressed="true"]{color:var(--bell)}
+.note{font-size:13px;color:var(--muted);margin:16px 2px;line-height:1.8}
+.daybar{display:flex;gap:6px;overflow:auto;margin:12px 0;padding-bottom:2px}
+.daybar .chip{flex:0 0 auto;font-size:15px;padding:8px 14px}
+.empty{padding:14px;color:var(--muted);font-family:"Noto Kufi Arabic",sans-serif}
+.howto{position:fixed;inset:0;background:rgba(10,18,26,.55);display:flex;align-items:flex-end;justify-content:center;z-index:50}
+.howto .sheet{background:var(--paper);width:100%;max-width:560px;border-radius:16px 16px 0 0;padding:18px 18px calc(22px + env(safe-area-inset-bottom,0px));border:1px solid var(--line)}
+.howto h3{margin:0 0 8px;font-size:17px}
+.howto ol{margin:0;padding-inline-start:20px;line-height:2}
+.howto .close{margin-top:14px;width:100%;background:var(--brand);color:#fff;border:0;border-radius:12px;padding:12px;font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;cursor:pointer}
+.install{background:var(--bell-soft);border-color:var(--bell)}
+.btn.foot{margin-top:18px;background:var(--wash)}
+.howto .sheet a{color:var(--brand);font-weight:600}
+.dev input{width:100%;margin:8px 0 2px;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--wash);color:var(--ink);font-size:14px;direction:ltr;text-align:left}
+.dev .lnk{display:block;padding:12px;border:1px solid var(--line);border-radius:10px;margin:8px 0;text-decoration:none;color:var(--ink);font-family:"Noto Kufi Arabic",sans-serif}
+.dev .small{font-size:12px;color:var(--muted)}
+.btn.foot .hint{padding:4px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
+.sum{font-family:"Noto Kufi Arabic",sans-serif;font-size:13px;color:var(--muted);margin:2px 2px 10px}
+@media (prefers-reduced-motion:no-preference){.card,.btn{transition:background .12s ease}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <button class="back" id="back" hidden>← پاشەوە</button>
+    <button class="back home" id="homebtn" hidden>سەرەتا</button>
+    <h1 id="title">خشتەی وانەکان</h1>
+    <div class="sub" id="sub">٢٠٢٦ – ٢٠٢٧</div>
+  </div>
+</header>
+<main class="wrap" id="view"></main>
+
+<script>
+const ICON192 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjY3MjE2ODBkLWM4MTEtNDQ3Ni04YjhiLWQxNDFlOWNmZTMyMQAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNoGIgbTqzlhHayVHMGCacEywAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6MTliOGU1NTgtOWNkNC00OTBkLTg0ZmMtZWJjYTUwYTRhMzFibHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaErYZTQRgrrZnb6xhWdHHOEAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYICvNuH61ZOwXNnmgHR+NCphaMw5dUMnfAbbz0XRQTbospGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2hXKg1/p3ZMCzW80JGguP1uAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggpvIxmFghGhxM3unzCJoP0BwgOHO6HANSfqGp+l9RBVJkbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTo2NzIxNjgwZC1jODExLTQ0NzYtOGI4Yi1kMTQxZTljZmUzMjEvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDoxYzljYjIzYi1jZGMzLTQwYWYtYjI2OS1mNDgzYzEzZDM1MWJyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggK824frVk7Bc2eaAdH40KmFozDl1Qyd8BtvPRdFBNuiyiY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIJFW4hWS1Bw5YNHgBa0LvNK/sa+r+xi8PFBuCgWMJBtfomN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIDosYJ7/HkdNYtVSbXOqDSFtvWdbaUtHDglsrh+L0VHZdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2WED1S/44Yll3k4mbpk6NitLL4eHWo2FEDiBb7lmOc5bF5bYIVbG5YAwKvTj9+RHgjGS1OfImoyXF1csGrPqpTJyov3XsdwAAAyFJREFUeJzt3bFRFkEYgOHFMbcEyGwCCzCB0IDAOqAAAq2CwICQEhxswJCMFqgAA8eREBm83Zv3eRrYb/bu/fePbg8OT84fB0S9mT0AzCQA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpb2ct/O79h1lLs6iHu9vN13QCkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIE8AzPdzdnj3c3Z7NnuO59jbvLNO+Dv3zy8dZS7/I0envLxfvZe69zTvG35m35AQgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQeHJ+ePk9be1e0lV8fX32bP8K8+//i0qz0eY2y+x04A0qZdkXR/c7mrX9TvX69nj/Aie9rno9OLzdd0ApAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkCYA0AZAmANIEQJoASBMAaQIgTQCkTbsf4Oj0Yle3l1wdb397yWvY2T5vvsfTAtibHV43xDO4IeaZ/vyS7mXuvc07hhtiYHMCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBEDatABmfAOGdc16H5wApAmAtKkB+BvEGHPfg+kngAjaZj//6QGMMX8TmGOF575EAGOssRlsZ5XnvUwAY6yzKfxfKz3npQIYY63N4fWt9nyXvCHm6Sbd31xOnITXsNpL/9TB4cn54+whYJbl/gLBlgRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpvwDUHE6DgUBLPwAAAABJRU5ErkJggg==";
+const ICON512 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjFkNTg4NWEwLTE4MDktNDRkOS1hNjkwLTk1OTA2MjQ0ZTlmMwAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNoARBSJpjEQnxYaSNp0gdyAwAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6M2ZhMjY1NmMtZDI1Mi00ZWZkLTk5YTgtNmUxN2NjODRjZmJlbHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaJwfSu6MPexVizRLfSXjfKoAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIDvX4ewHmdhgRnVRYWIuIHb2iNxRcmwQu/ea4dIl6JY/pGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2gI2BBHiSZy44R1FSac7YDZAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFgg79finpChKfR5+BNjebaFqNZxgCePsqYcaiTcIBopaSZkbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYToxZDU4ODVhMC0xODA5LTQ0ZDktYTY5MC05NTkwNjI0NGU5ZjMvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDowODY1NzJkNC0zNzQ4LTQ1NTAtYmExYy1iMTc4ZjU3ZWFkNmNyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggO9fh7AeZ2GBGdVFhYi4gdvaI3FFybBC795rh0iXolj+iY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIO7TtR5zYqQ/NN8jpxYY2+Z5viKQsx7XAkBGwTVcgCO3omN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIPR8WHvAu/RGm0yZK0dDLUvyEMTmiCO8ZnMpu9oVvoyxdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2WEAHS9JqUUQpWsnHdZ6AohmkcCMzmrVwfN8Q2B0el6LqWlam41LYUHLLTZCn/YvrwqL6w+QQNvSoBuxcUvsVlKENc/Yy9wAACc9JREFUeJzt271t3WYUgOEouL1H0O28RDxAGt3ShQrPoTuACm+RQkVKzSAvkNKdVvAEchEEkAUh8A/Jj+T7PJ26A5A8fPVRuri8unn6DQBI+X30AADA8gQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBh9ED7MGbt+9GjwCQ8+Xzw+gRNs0JAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAgSAAAQJAAAIAgAQAAQQIAAIIEAAAECQAACBIAABAkAAAg6DB6AFiTL58frp///Obtu7tRszAN1xReJwAm8M/HP0ePwESOp4dvfnZtt8813a+X15Yf4xMAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAgi4ur26eRg+xA9ejBwAIuhs9wJYdRg8Aa/PXH39bKjv04dN7oQ7P+AQAAEECAACCfAKYwOP9rSPjnTiezo6Jd87zuh/H03n0CJvmBAAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABA0GH0AHtwPJ2vR88AfB/P667cjR5gy5wAAECQEwB44cOn935DBHbPCQAABDkBmMDj/a3vUDvx8vuwa7t9rul+HU/n0SNsmhMAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAAIEgAAECQAACAIAEAAEECAACCBAAABAkAAAgSAAAQJAAmcDydR48AkGLv/joBAABBAgAAggQAAAQJAAAIEgAT8QcpAMuwb6chAAAgSABMSJUCzMuenY4AAIAgAQAAQQJgYo6nAOZhv05LAABAkACYgUoFmJa9Oj0BMBM3K8A07NN5CAAACBIAM1KtAL/GHp2PAJiZmxfg59if8xIAC3ATA/wYe3N+AmAhbmaA72NfLkMALMhNDfD/7MnlCICFubkBXmc/LksADOAmB/iWvbg8ATCImx3gX/bhGAJgIDc9UGcPjnMYPUDdfzf/4/3t4EkAluPFP54TgJXwMAAV9t06OAFYEacBwJ558a+LAFih5w+JGAC2zEt/vQTAyjkVALbIi3/9BMBGvPYwiQJgDbzst+ni8urmafQQAMCy/BcAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBXwHK4mtCyaFOJgAAAABJRU5ErkJggg==";
+(function manifest(){
+  const base = location.href.replace(/[^/]*$/, "");
+  const m = {
+    name: "خشتەی وانەکان — ئامادەیی ئەحمەد موختار",
+    short_name: "خشتەی وانەکان",
+    lang: "ckb", dir: "rtl",
+    start_url: base, scope: base,
+    display: "standalone",
+    background_color: "#1F4E79", theme_color: "#1F4E79",
+    icons: [
+      { src: ICON192, sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: ICON512, sizes: "512x512", type: "image/png", purpose: "any" }
+    ]
+  };
+  const link = document.createElement("link");
+  link.rel = "manifest";
+  link.href = URL.createObjectURL(new Blob([JSON.stringify(m)], { type: "application/manifest+json" }));
+  document.head.appendChild(link);
+  const t = document.getElementById("touchicon"); if (t) t.href = ICON192;
+  const f = document.getElementById("favicon"); if (f) f.href = ICON192;
+})();
+
+const SHEET_EDIT = "https://docs.google.com/spreadsheets/d/1a14IB06LvUIUNEVmGX-LbnEmfFgBwhKYmO5zZoCKJHA/edit";
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTBMoCVCFkCyOxCfxaMVchMMwWSEBQURBmnSEAOxUwN099jwdZQRNGsq6PcKoOuGeElb87fkK8-NWAU/pub?gid=1795552262&single=true&output=csv";
+const FALLBACK = {"days": ["یەکشەممە", "دووشەممە", "سێشەممە", "چوارشەممە", "پێنجشەممە"], "times": [["08:00", "08:40"], ["08:50", "09:30"], ["09:40", "10:20"], ["10:30", "11:10"], ["11:20", "12:00"], ["12:00", "12:35"]], "levels": ["١٠ زانستی", "١٠ ویژەیی", "١١ زانستی", "١١ ویژەیی", "١٢ زانستی", "١٢ ویژەیی"], "classes": [{"id": "١٠ زانستی ا", "level": "١٠ زانستی", "sec": "ا"}, {"id": "١٠ زانستی ب", "level": "١٠ زانستی", "sec": "ب"}, {"id": "١٠ زانستی ج", "level": "١٠ زانستی", "sec": "ج"}, {"id": "١٠ زانستی د", "level": "١٠ زانستی", "sec": "د"}, {"id": "١٠ زانستی ه", "level": "١٠ زانستی", "sec": "ه"}, {"id": "١٠ زانستی و", "level": "١٠ زانستی", "sec": "و"}, {"id": "١٠ زانستی ز", "level": "١٠ زانستی", "sec": "ز"}, {"id": "١٠ ویژەیی ا", "level": "١٠ ویژەیی", "sec": "ا"}, {"id": "١٠ ویژەیی ب", "level": "١٠ ویژەیی", "sec": "ب"}, {"id": "١٠ ویژەیی ج", "level": "١٠ ویژەیی", "sec": "ج"}, {"id": "١١ زانستی ا", "level": "١١ زانستی", "sec": "ا"}, {"id": "١١ زانستی ب", "level": "١١ زانستی", "sec": "ب"}, {"id": "١١ زانستی ج", "level": "١١ زانستی", "sec": "ج"}, {"id": "١١ زانستی د", "level": "١١ زانستی", "sec": "د"}, {"id": "١١ زانستی ه", "level": "١١ زانستی", "sec": "ه"}, {"id": "١١ ویژەیی ا", "level": "١١ ویژەیی", "sec": "ا"}, {"id": "١٢ زانستی ا", "level": "١٢ زانستی", "sec": "ا"}, {"id": "١٢ زانستی ب", "level": "١٢ زانستی", "sec": "ب"}, {"id": "١٢ زانستی ج", "level": "١٢ زانستی", "sec": "ج"}, {"id": "١٢ زانستی د", "level": "١٢ زانستی", "sec": "د"}, {"id": "١٢ زانستی ه", "level": "١٢ زانستی", "sec": "ه"}, {"id": "١٢ ویژەیی ا", "level": "١٢ ویژەیی", "sec": "ا"}], "grid": {"١٠ زانستی ا": [[{"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "هەرزەکاری", "t": "جەلال"}, {"s": "وەرزش", "t": "هیوا"}, {"s": "ئەحیا", "t": "سۆران"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "بیرکاری", "t": "فەتاح"}], [{"s": "بیرکاری", "t": "فەتاح"}, {"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "فیزیا", "t": "موحەمەد"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "کوردی", "t": "زوبێر"}, {"s": "کیمیا", "t": "جیهاد"}], [{"s": "کوردی", "t": "زوبێر"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "ئایین", "t": "عابید"}, {"s": "فیزیا", "t": "موحەمەد"}], [{"s": "بیرکاری", "t": "فەتاح"}, {"s": "کوردی", "t": "زوبێر"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "فیزیا", "t": "موحەمەد"}, {"s": "ئەحیا", "t": "سۆران"}, {"s": "ئینگلیزی", "t": "مەنسوور"}], [{"s": "کیمیا", "t": "جیهاد"}, {"s": "ئەحیا", "t": "سۆران"}, {"s": "مافی مرۆڤ", "t": "دڵاوەر"}, {"s": "فیزیا", "t": "موحەمەد"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "بیرکاری", "t": "فەتاح"}]], "١٠ زانستی ب": [[{"s": "هەرزەکاری", "t": "جەلال"}, {"s": "ئەحیا", "t": "سۆران"}, {"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "وەرزش", "t": "هیوا"}, {"s": "کیمیا", "t": "جیهاد"}], [{"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "کوردی", "t": "زوبێر"}, {"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "فیزیا", "t": "موحەمەد"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "بیرکاری", "t": "فەتاح"}], [{"s": "ئایین", "t": "عابید"}, {"s": "کوردی", "t": "زوبێر"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "فیزیا", "t": "موحەمەد"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "ئینگلیزی", "t": "مەنسوور"}], [{"s": "عەرەبی", "t": "تەوفیق"}, {"s": "فیزیا", "t": "موحەمەد"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "کوردی", "t": "زوبێر"}, {"s": "ئەحیا", "t": "سۆران"}], [{"s": "مافی مرۆڤ", "t": "دڵاوەر"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "ئەحیا", "t": "سۆران"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "فیزیا", "t": "موحەمەد"}]], "١٠ زانستی ج": [[{"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "هەرزەکاری", "t": "جەلال"}, {"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "ئەحیا", "t": "سۆران"}], [{"s": "فیزیا", "t": "موحەمەد"}, {"s": "مافی مرۆڤ", "t": "دڵاوەر"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "کوردی", "t": "زوبێر"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "ئینگلیزی", "t": "مەنسوور"}], [{"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "ئایین", "t": "عابید"}, {"s": "فیزیا", "t": "موحەمەد"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "کوردی", "t": "زوبێر"}, {"s": "عەرەبی", "t": "تەوفیق"}], [{"s": "ئەحیا", "t": "سۆران"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "کوردی", "t": "زوبێر"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "فیزیا", "t": "موحەمەد"}], [{"s": "عەرەبی", "t": "تەوفیق"}, {"s": "وەرزش", "t": "هیوا"}, {"s": "فیزیا", "t": "موحەمەد"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "ئەحیا", "t": "سۆران"}, {"s": "کیمیا", "t": "جیهاد"}]], "١٠ زانستی د": [[{"s": "ئەحیا", "t": "سۆران"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "کوردی", "t": "عیرفان"}, {"s": "ئینگلیزی", "t": "مەنسوور"}], [{"s": "مافی مرۆڤ", "t": "دڵاوەر"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "کوردی", "t": "عیرفان"}, {"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "فیزیا", "t": "ئارمەن"}], [{"s": "عەرەبی", "t": "تەوفیق"}, {"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "فیزیا", "t": "ئارمەن"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "وەرزش", "t": "هیوا"}, {"s": "کیمیا", "t": "جیهاد"}], [{"s": "ئینگلیزی", "t": "مەنسوور"}, {"s": "فیزیا", "t": "ئارمەن"}, {"s": "ئەحیا", "t": "سۆران"}, {"s": "هەرزەکاری", "t": "جەلال"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "کوردی", "t": "عیرفان"}], [{"s": "ئایین", "t": "عابید"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "کیمیا", "t": "جیهاد"}, {"s": "فیزیا", "t": "ئارمەن"}, {"s": "ئەحیا", "t": "سۆران"}]], "١٠ زانستی ه": [[{"s": "بیرکاری", "t": "فەتاح"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "کوردی", "t": "عیرفان"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "ئینگلیزی", "t": "ئاشتی"}], [{"s": "کوردی", "t": "عیرفان"}, {"s": "بیرکاری", "t": "فەتاح"}, {"s": "فیزیا", "t": "ئارمەن"}, {"s": "ئینگلیزی", "t": "ئاشتی"}, {"s": "مافی مرۆڤ", "t": "دڵاوەر"}, {"s": "کیمیا", "t": "بەنان"}], [{"s": "هەرزەکاری", "t": "جەلال"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "وەرزش", "t": "هیوا"}, {"s": "فیزیا", "t": "ئارمەن"}, {"s": "ئینگلیزی", "t": "ئاشتی"}], [{"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "کوردی", "t": "عیرفان"}, {"s": "فیزیا", "t": "ئارمەن"}, {"s": "ئینگلیزی", "t": "ئاشتی"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "بیرکاری", "t": "فەتاح"}], [{"s": "بیرکاری", "t": "فەتاح"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "ئایین", "t": "عابید"}, {"s": "عەرەبی", "t": "تەوفیق"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "فیزیا", "t": "ئارمەن"}]], "١٠ زانستی و": [[{"s": "کوردی", "t": "عیرفان"}, {"s": "مافی مرۆڤ", "t": "دڵاوەر"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "ئینگلیزی", "t": "ئاشتی"}, {"s": "ئایین", "t": "عابید"}, {"s": "ئەحیا", "t": "ئەمجەد"}], [{"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "فیزیا", "t": "ئارمەن"}, {"s": "کوردی", "t": "عیرفان"}, {"s": "ئینگلیزی", "t": "ئاشتی"}], [{"s": "فیزیا", "t": "ئارمەن"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "هەرزەکاری", "t": "جەلال"}, {"s": "ئینگلیزی", "t": "ئاشتی"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "کیمیا", "t": "بەنان"}], [{"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "ئینگلیزی", "t": "ئاشتی"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "کوردی", "t": "عیرفان"}, {"s": "فیزیا", "t": "ئارمەن"}], [{"s": "کیمیا", "t": "بەنان"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "فیزیا", "t": "ئارمەن"}, {"s": "وەرزش", "t": "باست"}, {"s": "بیرکاری", "t": "ئیبراهیم"}]], "١٠ زانستی ز": [[{"s": "مافی مرۆڤ", "t": "دڵاوەر"}, {"s": "کوردی", "t": "عیرفان"}, {"s": "ئینگلیزی", "t": "ئاشتی"}, {"s": "ئایین", "t": "عابید"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "کیمیا", "t": "بەنان"}], [{"s": "فیزیا", "t": "ئارمەن"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "ئینگلیزی", "t": "ئاشتی"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "کوردی", "t": "عیرفان"}], [{"s": "کیمیا", "t": "بەنان"}, {"s": "هەرزەکاری", "t": "جەلال"}, {"s": "ئینگلیزی", "t": "ئاشتی"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "فیزیا", "t": "ئارمەن"}], [{"s": "ئینگلیزی", "t": "ئاشتی"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "کوردی", "t": "عیرفان"}, {"s": "فیزیا", "t": "ئارمەن"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "بیرکاری", "t": "ئیبراهیم"}], [{"s": "فیزیا", "t": "ئارمەن"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "وەرزش", "t": "باست"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "عەرەبی", "t": "حەمید"}]], "١٠ ویژەیی ا": [[{"s": "کۆمەڵناسی", "t": "سەباح"}, {"s": "مێژوو", "t": "خوبەیب نادر"}, {"s": "کوردی", "t": "گۆران نووری"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}, {"s": "هەرزەکاری", "t": "هێمن عەلی"}, {"s": "ئابووری", "t": "سیروان"}], [{"s": "هونەر", "t": "عەبدوڵڵا"}, {"s": "جوگرافیا", "t": "هونەر"}, {"s": "ئابووری", "t": "سیروان"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}, {"s": "ئایین", "t": "عابید"}, {"s": "کوردی", "t": "گۆران نووری"}], [{"s": "مێژوو", "t": "خوبەیب نادر"}, {"s": "وەرزش", "t": "باست"}, {"s": "جوگرافیا", "t": "هونەر"}, {"s": "بیرکاری", "t": "ن"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}, {"s": "عەرەبی", "t": "حەمید"}], [{"s": "کوردی", "t": "گۆران نووری"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "مافی مرۆڤ", "t": "دڵاوەر"}, {"s": "کۆمەڵناسی", "t": "سەباح"}, {"s": "بیرکاری", "t": "ن"}, {"s": "جوگرافیا", "t": "هونەر"}], [{"s": "مێژوو", "t": "خوبەیب نادر"}, {"s": "ئابووری", "t": "سیروان"}, {"s": "بیرکاری", "t": "ن"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}]], "١٠ ویژەیی ب": [[{"s": "ئابووری", "t": "عوسمان"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "مێژوو", "t": "خوبەیب نادر"}, {"s": "کوردی", "t": "گۆران نووری"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}, {"s": "مافی مرۆڤ", "t": "ن"}], [{"s": "ئابووری", "t": "عوسمان"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "جوگرافیا", "t": "هونەر"}, {"s": "ئایین", "t": "عابید"}, {"s": "کوردی", "t": "گۆران نووری"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}], [{"s": "بیرکاری", "t": "ن"}, {"s": "مێژوو", "t": "خوبەیب نادر"}, {"s": "ئابووری", "t": "عوسمان"}, {"s": "جوگرافیا", "t": "هونەر"}, {"s": "هەرزەکاری", "t": "هێمن عەلی"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}], [{"s": "عەرەبی", "t": "حەمید"}, {"s": "کۆمەڵناسی", "t": "سەباح"}, {"s": "کوردی", "t": "گۆران نووری"}, {"s": "بیرکاری", "t": "ن"}, {"s": "جوگرافیا", "t": "هونەر"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}], [{"s": "هونەر", "t": "عەبدوڵڵا"}, {"s": "مێژوو", "t": "خوبەیب نادر"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "وەرزش", "t": "باست"}, {"s": "کۆمەڵناسی", "t": "سەباح"}, {"s": "بیرکاری", "t": "ن"}]], "١٠ ویژەیی ج": [[{"s": "مافی مرۆڤ", "t": "خوبەیب نادر"}, {"s": "ئابووری", "t": "عوسمان"}, {"s": "مێژوو", "t": "هێمن عەلی"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "کوردی", "t": "گۆران نووری"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}], [{"s": "جوگرافیا", "t": "هونەر"}, {"s": "ئابووری", "t": "عوسمان"}, {"s": "ئایین", "t": "عابید"}, {"s": "کوردی", "t": "گۆران نووری"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}, {"s": "کۆمەڵناسی", "t": "سەباح"}], [{"s": "عەرەبی", "t": "حەمید"}, {"s": "جوگرافیا", "t": "هونەر"}, {"s": "وەرزش", "t": "باست"}, {"s": "مێژوو", "t": "هێمن عەلی"}, {"s": "بیرکاری", "t": "ن"}, {"s": "ئابووری", "t": "عوسمان"}], [{"s": "کۆمەڵناسی", "t": "سەباح"}, {"s": "کوردی", "t": "گۆران نووری"}, {"s": "عەرەبی", "t": "حەمید"}, {"s": "جوگرافیا", "t": "هونەر"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}, {"s": "بیرکاری", "t": "ن"}], [{"s": "عەرەبی", "t": "حەمید"}, {"s": "هونەر", "t": "عەبدوڵڵا"}, {"s": "هەرزەکاری", "t": "هێمن عەلی"}, {"s": "بیرکاری", "t": "ن"}, {"s": "مێژوو", "t": "هێمن عەلی"}, {"s": "ئینگلیزی", "t": "ڕابەر سەلام"}]], "١١ زانستی ا": [[{"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "کوردی", "t": "ئیدریس"}, {"s": "بیرکاری", "t": "ئیبراهیم"}], [{"s": "کوردی", "t": "ئیدریس"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "ئینگلیزی", "t": "خەبات"}], [{"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "ئینگلیزی", "t": "خەبات"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "کیمیا", "t": "بەنان"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "عەرەبی", "t": "ڕێباز"}], [{"s": "وەرزش", "t": "بیلال"}, {"s": "هونەر", "t": "وەرزێر"}, {"s": "ئینگلیزی", "t": "خەبات"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "ئەحیا", "t": "ئیسماعیل"}], [{"s": "ئینگلیزی", "t": "خەبات"}, {"s": "ئایین", "t": "عابید"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "کوردی", "t": "ئیدریس"}, {"s": "کیمیا", "t": "بەنان"}]], "١١ زانستی ب": [[{"s": "کوردی", "t": "ئیدریس"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "عەرەبی", "t": "ڕێباز"}], [{"s": "کیمیا", "t": "مەحفووز"}, {"s": "کوردی", "t": "ئیدریس"}, {"s": "وەرزش", "t": "بیلال"}, {"s": "ئینگلیزی", "t": "خەبات"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "ئەحیا", "t": "ئیسماعیل"}], [{"s": "کیمیا", "t": "مەحفووز"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "ئینگلیزی", "t": "خەبات"}], [{"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "ئینگلیزی", "t": "خەبات"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "فیزیا", "t": "ماجد"}], [{"s": "فیزیا", "t": "ماجد"}, {"s": "ئینگلیزی", "t": "خەبات"}, {"s": "کوردی", "t": "ئیدریس"}, {"s": "هونەر", "t": "وەرزێر"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "کیمیا", "t": "مەحفووز"}]], "١١ زانستی ج": [[{"s": "عەرەبی", "t": "ڕێباز"}, {"s": "وەرزش", "t": "بیلال"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "کوردی", "t": "نەریمان"}], [{"s": "کوردی", "t": "نەریمان"}, {"s": "ئینگلیزی", "t": "خەبات"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "بیرکاری", "t": "ئیبراهیم"}], [{"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "ئینگلیزی", "t": "خەبات"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "ئەحیا", "t": "ئیسماعیل"}], [{"s": "کوردی", "t": "نەریمان"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "ئینگلیزی", "t": "خەبات"}], [{"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "هونەر", "t": "وەرزێر"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "ئینگلیزی", "t": "خەبات"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "فیزیا", "t": "ماجد"}]], "١١ زانستی د": [[{"s": "وەرزش", "t": "بیلال"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "کوردی", "t": "نەریمان"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "فیزیا", "t": "ماجد"}], [{"s": "هونەر", "t": "وەرزێر"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "ئینگلیزی", "t": "نەهرۆ"}, {"s": "کوردی", "t": "نەریمان"}, {"s": "عەرەبی", "t": "ڕێباز"}], [{"s": "ئینگلیزی", "t": "نەهرۆ"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "بیرکاری", "t": "ئیبراهیم"}], [{"s": "ئینگلیزی", "t": "نەهرۆ"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "کوردی", "t": "نەریمان"}, {"s": "کیمیا", "t": "مەحفووز"}], [{"s": "کیمیا", "t": "مەحفووز"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "ئینگلیزی", "t": "نەهرۆ"}]], "١١ زانستی ه": [[{"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "کوردی", "t": "نەریمان"}, {"s": "وەرزش", "t": "ئیقبال (وەرزش)"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "ئەحیا", "t": "ئیسماعیل"}], [{"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "کوردی", "t": "نەریمان"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "ئینگلیزی", "t": "نەهرۆ"}], [{"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "ئینگلیزی", "t": "نەهرۆ"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "فیزیا", "t": "ماجد"}], [{"s": "کیمیا", "t": "مەحفووز"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "ئینگلیزی", "t": "نەهرۆ"}, {"s": "ئەحیا", "t": "ئیسماعیل"}, {"s": "بیرکاری", "t": "ئیبراهیم"}, {"s": "کوردی", "t": "نەریمان"}], [{"s": "هونەر", "t": "وەرزێر"}, {"s": "ئینگلیزی", "t": "نەهرۆ"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "فیزیا", "t": "ماجد"}, {"s": "عەرەبی", "t": "ڕێباز"}]], "١١ ویژەیی ا": [[{"s": "مێژوو", "t": "ئەرسەلان"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "ئابووری", "t": "سیروان"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "کوردی", "t": "ئیدریس"}], [{"s": "عەرەبی", "t": "ڕێباز"}, {"s": "ئینگلیزی", "t": "نەهرۆ"}, {"s": "مێژوو", "t": "ئەرسەلان"}, {"s": "ئابووری", "t": "سیروان"}, {"s": "فەلسەفە", "t": "سەباح"}, {"s": "کوردی", "t": "ئیدریس"}], [{"s": "بیرکاری", "t": "ئاکام"}, {"s": "جوگرافیا", "t": "هێمن ئەحمەد"}, {"s": "عەرەبی", "t": "ڕێباز"}, {"s": "ئینگلیزی", "t": "نەهرۆ"}, {"s": "مێژوو", "t": "ئەرسەلان"}, {"s": "", "t": ""}], [{"s": "کۆمپیوتەر", "t": "گۆران قادر"}, {"s": "جوگرافیا", "t": "هێمن ئەحمەد"}, {"s": "وەرزش", "t": "ئیقبال (وەرزش)"}, {"s": "فەلسەفە", "t": "سەباح"}, {"s": "کوردی", "t": "ئیدریس"}, {"s": "ئینگلیزی", "t": "نەهرۆ"}], [{"s": "ئینگلیزی", "t": "نەهرۆ"}, {"s": "جوگرافیا", "t": "هێمن ئەحمەد"}, {"s": "ئابووری", "t": "سیروان"}, {"s": "کوردی", "t": "ئیدریس"}, {"s": "هونەر", "t": "وەرزێر"}, {"s": "بیرکاری", "t": "ئاکام"}]], "١٢ زانستی ا": [[{"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "کوردی", "t": "عوسمان"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "هونەر", "t": "وەرزێر"}, {"s": "ئینگلیزی", "t": "عومەر"}], [{"s": "ئینگلیزی", "t": "عومەر"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "کوردی", "t": "عوسمان"}, {"s": "وەرزش", "t": "ئیقبال (وەرزش)"}, {"s": "عەرەبی", "t": "ئیحسان"}], [{"s": "بیرکاری", "t": "فریا"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "ئینگلیزی", "t": "عومەر"}, {"s": "کیمیا", "t": "مەحفووز"}], [{"s": "عەرەبی", "t": "ئیحسان"}, {"s": "کوردی", "t": "عوسمان"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "فیزیا", "t": "پێشڕەو"}], [{"s": "فیزیا", "t": "پێشڕەو"}, {"s": "ئینگلیزی", "t": "عومەر"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "کیمیا", "t": "مەحفووز"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "ئەحیا", "t": "ئەمجەد"}]], "١٢ زانستی ب": [[{"s": "بیرکاری", "t": "فریا"}, {"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "کیمیا", "t": "شاهۆ"}, {"s": "ئینگلیزی", "t": "عومەر"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "کوردی", "t": "عوسمان"}], [{"s": "بیرکاری", "t": "فریا"}, {"s": "وەرزش", "t": "ئیقبال (وەرزش)"}, {"s": "کوردی", "t": "عوسمان"}, {"s": "کیمیا", "t": "شاهۆ"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "ئینگلیزی", "t": "عومەر"}], [{"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "ئینگلیزی", "t": "عومەر"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "کیمیا", "t": "شاهۆ"}], [{"s": "هونەر", "t": "وەرزێر"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "کوردی", "t": "عوسمان"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "ئەحیا", "t": "ئەمجەد"}], [{"s": "ئەحیا", "t": "ئەمجەد"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "ئینگلیزی", "t": "عومەر"}, {"s": "کیمیا", "t": "شاهۆ"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "بیرکاری", "t": "فریا"}]], "١٢ زانستی ج": [[{"s": "فیزیا", "t": "پێشڕەو"}, {"s": "ئینگلیزی", "t": "عومەر"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "هونەر", "t": "وەرزێر"}, {"s": "کوردی", "t": "عوسمان"}, {"s": "کیمیا", "t": "شاهۆ"}], [{"s": "کیمیا", "t": "شاهۆ"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "ئینگلیزی", "t": "عومەر"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "کوردی", "t": "عوسمان"}, {"s": "ئەحیا", "t": "سەعدوون"}], [{"s": "عەرەبی", "t": "ئیحسان"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "ئەحیا", "t": "سەعدوون"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "کیمیا", "t": "شاهۆ"}, {"s": "ئینگلیزی", "t": "عومەر"}], [{"s": "فیزیا", "t": "پێشڕەو"}, {"s": "وەرزش", "t": "ئیقبال (وەرزش)"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "کوردی", "t": "عوسمان"}, {"s": "ئەحیا", "t": "سەعدوون"}, {"s": "بیرکاری", "t": "فریا"}], [{"s": "عەرەبی", "t": "ئیحسان"}, {"s": "ئەحیا", "t": "سەعدوون"}, {"s": "بیرکاری", "t": "فریا"}, {"s": "ئینگلیزی", "t": "عومەر"}, {"s": "کیمیا", "t": "شاهۆ"}, {"s": "فیزیا", "t": "پێشڕەو"}]], "١٢ زانستی د": [[{"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "کیمیا", "t": "شاهۆ"}, {"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "بیرکاری", "t": "ئاکام"}], [{"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "ئەحیا", "t": "سەعدوون"}, {"s": "کیمیا", "t": "شاهۆ"}, {"s": "ئینگلیزی", "t": "فیرۆز"}], [{"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "کیمیا", "t": "شاهۆ"}, {"s": "ئەحیا", "t": "سەعدوون"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "فیزیا", "t": "پێشڕەو"}], [{"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "وەرزش", "t": "ئەسباح"}, {"s": "هونەر", "t": "وەرزێر"}, {"s": "ئەحیا", "t": "سەعدوون"}], [{"s": "بیرکاری", "t": "ئاکام"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "ئەحیا", "t": "سەعدوون"}, {"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "کیمیا", "t": "شاهۆ"}]], "١٢ زانستی ه": [[{"s": "کیمیا", "t": "شاهۆ"}, {"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "فیزیا", "t": "پێشڕەو"}], [{"s": "بیرکاری", "t": "ئاکام"}, {"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "ئەحیا", "t": "سەعدوون"}, {"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "کیمیا", "t": "شاهۆ"}], [{"s": "کیمیا", "t": "شاهۆ"}, {"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "ئەحیا", "t": "سەعدوون"}], [{"s": "ئەحیا", "t": "سەعدوون"}, {"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "هونەر", "t": "وەرزێر"}, {"s": "وەرزش", "t": "ئەسباح"}, {"s": "بیرکاری", "t": "ئاکام"}], [{"s": "ئەحیا", "t": "سەعدوون"}, {"s": "کیمیا", "t": "شاهۆ"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "فیزیا", "t": "پێشڕەو"}, {"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "عەرەبی", "t": "ئیحسان"}]], "١٢ ویژەیی ا": [[{"s": "جوگرافیا", "t": "ئەنوەر"}, {"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "مێژوو", "t": "ئەرسەلان"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "", "t": ""}], [{"s": "مێژوو", "t": "ئەرسەلان"}, {"s": "جوگرافیا", "t": "ئەنوەر"}, {"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "ئابووری", "t": "هێمن ئەحمەد"}], [{"s": "ئابووری", "t": "هێمن ئەحمەد"}, {"s": "بیرکاری", "t": "ئاکام"}, {"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "مێژوو", "t": "ئەرسەلان"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "", "t": ""}], [{"s": "ئابووری", "t": "هێمن ئەحمەد"}, {"s": "کوردی", "t": "ئیقبال عەبدولواحید"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "ئایین", "t": "ئەحمەد"}, {"s": "جوگرافیا", "t": "ئەنوەر"}, {"s": "ئینگلیزی", "t": "فیرۆز"}], [{"s": "ئابووری", "t": "هێمن ئەحمەد"}, {"s": "ئینگلیزی", "t": "فیرۆز"}, {"s": "هونەر", "t": "وەرزێر"}, {"s": "وەرزش", "t": "ئەسباح"}, {"s": "عەرەبی", "t": "ئیحسان"}, {"s": "", "t": ""}]]}};
+let DATA = FALLBACK;
+
+function parseCSV(text){
+  const rows=[]; let row=[], cell="", q=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i];
+    if(q){ if(ch==='"'){ if(text[i+1]==='"'){cell+='"';i++;} else q=false; } else cell+=ch; }
+    else if(ch==='"') q=true;
+    else if(ch===","){ row.push(cell); cell=""; }
+    else if(ch==="\n"){ row.push(cell); rows.push(row); row=[]; cell=""; }
+    else if(ch!=="\r") cell+=ch;
+  }
+  if(cell.length||row.length){ row.push(cell); rows.push(row); }
+  return rows;
+}
+
+function buildFromCSV(text){
+  const rows=parseCSV(text).map(r=>r.map(c=>c.trim()));
+  if(rows.length<62) throw new Error("شیتەکە ناتەواوە");
+  const lvlRow=rows[0], secRow=rows[1];
+  const classes=[]; let lvl="";
+  const width=Math.max(lvlRow.length, secRow.length);
+  for(let c=3;c<width;c++){
+    if(lvlRow[c]) lvl=lvlRow[c];
+    const sec=(secRow[c]||"").trim();
+    if(!sec) continue;
+    classes.push({id:lvl+" "+sec, level:lvl, sec:sec, col:c});
+  }
+  if(classes.length<10) throw new Error("پۆلەکان نەدۆزرانەوە");
+  const grid={}, times=[];
+  classes.forEach(c=>grid[c.id]=[[],[],[],[],[]]);
+  for(let d=0; d<5; d++){
+    for(let p=0; p<6; p++){
+      const r=2+(d*6+p)*2;
+      const sub=rows[r]||[], who=rows[r+1]||[];
+      if(d===0){ const t=(sub[2]||"").split(/\s+/); times.push([t[0]||"", t[1]||""]); }
+      classes.forEach(c=>grid[c.id][d].push({s:(sub[c.col]||""), t:(who[c.col]||"")}));
+    }
+  }
+  const levels=[]; classes.forEach(c=>{ if(!levels.includes(c.level)) levels.push(c.level); });
+  return {days:FALLBACK.days, times:(times[0] && times[0][0]?times:FALLBACK.times), levels,
+          classes:classes.map(c=>({id:c.id,level:c.level,sec:c.sec})), grid};
+}
+const DIG = s => String(s).replace(/[0-9]/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+const ORD = ["یەکەم","دووەم","سێیەم","چوارەم","پێنجەم","شەشەم"];
+
+// teacher + clash indexes, rebuilt whenever DATA changes
+let TEACH = {}, TNAMES = [], CLASH = new Set();
+function reindex(){
+  TEACH = {}; CLASH = new Set();
+  DATA.classes.forEach(c => {
+    (DATA.grid[c.id] || []).forEach((day, d) => day.forEach((x, p) => {
+      if (!x.t) return;
+      (TEACH[x.t] = TEACH[x.t] || []).push({ d, p, cls: c.id, s: x.s });
+    }));
+  });
+  TNAMES = Object.keys(TEACH).sort((a, b) => a.localeCompare(b, "ckb"));
+  Object.entries(TEACH).forEach(([t, list]) => {
+    if (t === "ن" || !t) return;
+    const by = {};
+    list.forEach(x => { const k = x.d + "-" + x.p; (by[k] = by[k] || []).push(x); });
+    Object.values(by).forEach(g => { if (g.length > 1) g.forEach(x => CLASH.add(t + "|" + x.d + "|" + x.p + "|" + x.cls)); });
+  });
+}
+reindex();
+
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} }
+};
+
+function nowInfo() {
+  const n = new Date();
+  const js = n.getDay();            // 0 Sun .. 6 Sat
+  const d = (js >= 0 && js <= 4) ? js : -1;   // Sun..Thu -> 0..4
+  if (d < 0) return { d: -1 };
+  const mins = n.getHours() * 60 + n.getMinutes();
+  const toM = s => +s.slice(0, 2) * 60 + +s.slice(3);
+  for (let p = 0; p < 6; p++) {
+    const [a, b] = DATA.times[p];
+    if (mins >= toM(a) && mins < toM(b)) return { d, p, state: "in" };
+    if (mins < toM(a)) return { d, p, state: "before" };
+  }
+  return { d, p: -1, state: "after" };
+}
+
+const el = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
+const view = document.getElementById("view");
+const titleEl = document.getElementById("title");
+const subEl = document.getElementById("sub");
+const backEl = document.getElementById("back");
+const homeEl = document.getElementById("homebtn");
+let stack = [];
+
+function go(state, push = true) {
+  if (push) { stack.push(state); try { history.pushState({ i: stack.length }, ""); } catch (e) {} }
+  render(state);
+  window.scrollTo(0, 0);
+}
+function goBack() {
+  if (stack.length <= 1) return;
+  try { history.back(); } catch (e) { stepBack(); }
+}
+function stepBack() {
+  if (stack.length <= 1) return;
+  stack.pop();
+  render(stack[stack.length - 1]);
+  window.scrollTo(0, 0);
+}
+function goHome() {
+  if (stack.length <= 1) return;
+  const jumps = stack.length - 1;
+  stack = [{ v: "home" }];
+  try { history.go(-jumps); } catch (e) { render(stack[0]); }
+  render(stack[0]);
+  window.scrollTo(0, 0);
+}
+window.addEventListener("popstate", () => {
+  if (stack.length > 1) { stack.pop(); render(stack[stack.length - 1]); window.scrollTo(0, 0); }
+  else render(stack[0]);
+});
+backEl.addEventListener("click", goBack);
+
+// hidden developer panel — five taps on the title
+let taps = 0, tapTimer = null;
+titleEl.addEventListener("click", () => {
+  taps++;
+  clearTimeout(tapTimer);
+  tapTimer = setTimeout(() => { taps = 0; }, 2500);
+  if (taps >= 5) { taps = 0; devPanel(); }
+});
+
+function devPanel() {
+  const saved = store.get("devlink") || "";
+  const box = el(`<div class="howto"><div class="sheet dev">
+    <h3>پەرەپێدان</h3>
+    <a class="lnk" href="${SHEET_EDIT}" target="_blank" rel="noopener">گووگڵ شیت — دەستکاریکردنی خشتە</a>
+    <div class="small">لینکی چاتەکەی کلاود — تەنها لەم مۆبایلەدا هەڵدەگیرێت</div>
+    <input id="devin" placeholder="https://claude.ai/chat/..." value="${saved}">
+    <a class="lnk" id="devopen" href="${saved || "https://claude.ai/"}" target="_blank" rel="noopener">کردنەوەی کلاود</a>
+    <button class="close" id="devsave">پاشەکەوتی بکە</button>
+    <button class="close" id="devclear" style="background:var(--wash);color:var(--ink);margin-top:8px">سڕینەوەی کاش و نوێکردنەوە</button>
+    <button class="close" style="background:var(--wash);color:var(--ink);margin-top:8px">داخستن</button>
+  </div></div>`);
+  box.addEventListener("click", e => {
+    if (e.target === box) box.remove();
+    if (e.target.id === "devsave") {
+      const v = box.querySelector("#devin").value.trim();
+      if (v) store.set("devlink", v); else store.del("devlink");
+      box.querySelector("#devopen").href = v || "https://claude.ai/";
+      e.target.textContent = "پاشەکەوت کرا";
+      return;
+    }
+    if (e.target.id === "devclear") {
+      store.del("sheet");
+      if ("caches" in window) caches.keys().then(ks => ks.forEach(k => caches.delete(k)));
+      if (navigator.serviceWorker) navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
+      setTimeout(() => location.reload(), 400);
+      return;
+    }
+    if (e.target.classList.contains("close")) box.remove();
+  });
+  document.body.append(box);
+}
+homeEl.addEventListener("click", goHome);
+
+function render(st) {
+  backEl.hidden = stack.length <= 1;
+  homeEl.hidden = stack.length <= 1;
+  view.innerHTML = "";
+  if (st.v === "home") return home();
+  if (st.v === "all") return allGrid();
+  if (st.v === "level") return level(st.level);
+  if (st.v === "class") return classView(st.cls);
+  if (st.v === "teachers") return teacherList();
+  if (st.v === "teacher") return teacherView(st.t);
+}
+
+function setHead(t, s) { titleEl.textContent = t; subEl.textContent = s || "٢٠٢٦ – ٢٠٢٧"; }
+
+function footBack() {
+  if (stack.length <= 1) return;
+  const b = el('<button class="btn foot"><span>← گەڕانەوە</span><span class="hint">سەرەتا</span></button>');
+  b.onclick = goBack;
+  b.querySelector(".hint").onclick = (e) => { e.stopPropagation(); goHome(); };
+  view.append(b);
+}
+
+function nowCard() {
+  const i = nowInfo();
+  let k = "ئێستا", v, t = "";
+  if (i.d < 0) { v = "ڕۆژی پشوو"; t = "دەوام ڕۆژانی یەکشەممە تا پێنجشەممەیە"; }
+  else if (i.state === "in") { k = "ئێستا لە دەرسدایە"; v = "دەرسی " + ORD[i.p]; t = DATA.times[i.p][0] + " – " + DATA.times[i.p][1]; }
+  else if (i.state === "before") { k = "دەرسی داهاتوو"; v = "دەرسی " + ORD[i.p]; t = "لە " + DATA.times[i.p][0] + "ەوە دەست پێ دەکات"; }
+  else { v = "دەوام کۆتایی هات"; t = "بەیانی لە " + DATA.times[0][0] + " دەست پێ دەکات"; }
+  const day = i.d >= 0 ? DATA.days[i.d] : "";
+  return el(`<section class="now"><div class="k">${k}${day ? " — " + day : ""}</div><div class="v">${v}</div><div class="t">${t}</div></section>`);
+}
+
+function home() {
+  setHead("ئامادەیی ئەحمەد موختار");
+  view.append(nowCard());
+  const fav = store.get("fav");
+  const m = el('<nav class="menu"></nav>');
+  if (fav && TEACH[fav]) {
+    m.append(el(`<div class="head">خشتەی من</div>`));
+    const b = el(`<button class="btn"><span>${fav}</span><span class="hint">${DIG(TEACH[fav].length)} وانە</span></button>`);
+    b.onclick = () => go({ v: "teacher", t: fav });
+    m.append(b);
+  }
+  m.append(el('<div class="head">خشتەکان</div>'));
+  const a = el('<button class="btn"><span>خشتەی گشتی</span><span class="hint">هەموو پۆلەکان</span></button>');
+  a.onclick = () => go({ v: "all" });
+  m.append(a);
+  const t = el(`<button class="btn"><span>مامۆستایان</span><span class="hint">${DIG(TNAMES.length)} مامۆستا</span></button>`);
+  t.onclick = () => go({ v: "teachers" });
+  m.append(t);
+  m.append(el('<div class="head">ئاستەکان</div>'));
+  DATA.levels.forEach(l => {
+    const n = DATA.classes.filter(c => c.level === l).length;
+    const b = el(`<button class="btn"><span>${l}</span><span class="hint">${DIG(n)} پۆل</span></button>`);
+    b.onclick = () => go({ v: "level", level: l });
+    m.append(b);
+  });
+  view.append(m);
+  if (!standalone()) {
+    const ins = el('<button class="btn install"><span>زیادی کە بۆ شاشە</span><span class="hint">ئایکۆنی ئەپەکە لەسەر مۆبایلەکەت</span></button>');
+    ins.onclick = addToHome;
+    view.append(ins);
+  }
+  const sync = el(`<button class="btn"><span id="syncline">${syncText()}</span><span class="hint">نوێی بکەرەوە</span></button>`);
+  sync.onclick = () => refresh(false);
+  view.append(sync);
+  view.append(el(`<p class="note">«ن» واتە ناوی مامۆستاکە هێشتا نەزانراوە.<br>کاتی وانەکان: ${DIG("08:00")} تا ${DIG("12:35")}. لە نێوان دەرسی پێنجەم و شەشەمدا پشوو نییە.<br>ئەم خشتەیە وەشانی تاقیکردنەوەیە. هەر گۆڕانکارییەک لە خشتەی فەرمیدا بێت، لێرەش نوێ دەکرێتەوە.</p>`));
+}
+
+function allGrid() {
+  setHead("خشتەی گشتی", "دوو پەنجە بۆ گەورەکردن");
+  const bar = el('<div class="daybar"></div>');
+  const box = el('<div class="scroll"></div>');
+  let day = Math.max(0, nowInfo().d);
+  DATA.days.forEach((d, i) => {
+    const c = el(`<button class="chip" aria-pressed="${i === day}">${d}</button>`);
+    c.onclick = () => { day = i; [...bar.children].forEach((x, j) => x.setAttribute("aria-pressed", j === i)); draw(); };
+    bar.append(c);
+  });
+  function draw() {
+    const n = nowInfo();
+    let h = '<table><thead><tr><th>دەرس</th>';
+    DATA.classes.forEach(c => h += `<th>${c.level.replace("زانستی", "ز").replace("ویژەیی", "و")} ${c.sec}</th>`);
+    h += "</tr></thead><tbody>";
+    for (let p = 0; p < 6; p++) {
+      const live = (n.d === day && n.state === "in" && n.p === p);
+      h += `<tr class="${p % 2 ? "band" : ""}"><th>${DIG(p + 1)}<br><span style="font-size:10px;direction:ltr">${DATA.times[p][0]}</span></th>`;
+      DATA.classes.forEach(c => {
+        const x = DATA.grid[c.id][day][p];
+        const bad = x.t && CLASH.has(x.t + "|" + day + "|" + p + "|" + c.id);
+        h += `<td class="${bad ? "clash" : ""}${live ? " hit" : ""}"><span class="s">${x.s || "—"}</span><span class="w">${x.t || ""}</span></td>`;
+      });
+      h += "</tr>";
+    }
+    box.innerHTML = h + "</tbody></table>";
+  }
+  draw();
+  view.append(bar, box);
+  view.append(el('<p class="note">خانە سوورەکان تەزاربن: هەمان مامۆستا لە یەک کاتدا لە دوو پۆلدایە.</p>'));
+  footBack();
+}
+
+function level(l) {
+  setHead(l, "پۆلێک هەڵبژێرە");
+  const ch = el('<div class="chips"></div>');
+  DATA.classes.filter(c => c.level === l).forEach(c => {
+    const b = el(`<button class="chip">${c.sec}</button>`);
+    b.onclick = () => go({ v: "class", cls: c.id });
+    ch.append(b);
+  });
+  view.append(ch);
+  footBack();
+}
+
+function dayTabs(initial, onPick) {
+  const bar = el('<div class="daybar"></div>');
+  DATA.days.forEach((d, i) => {
+    const c = el(`<button class="chip" aria-pressed="${i === initial}">${d}</button>`);
+    c.onclick = () => { [...bar.children].forEach((x, j) => x.setAttribute("aria-pressed", j === i)); onPick(i); };
+    bar.append(c);
+  });
+  return bar;
+}
+
+function lessonRow(p, s, who, live, bad) {
+  return el(`<div class="row ${live ? "live" : ""} ${s ? "" : "free"}">
+    <div class="n"><b>${DIG(p + 1)}</b><span>${DATA.times[p][0]}</span></div>
+    <div class="m"><div class="s">${s || "بەتاڵ"}</div><div class="who ${bad ? "clash" : ""}">${who || ""}</div></div>
+  </div>`);
+}
+
+function classView(cid) {
+  setHead(cid);
+  let day = Math.max(0, nowInfo().d);
+  const card = el('<section class="card"></section>');
+  function draw() {
+    const n = nowInfo();
+    card.innerHTML = "";
+    DATA.grid[cid][day].forEach((x, p) => {
+      const bad = x.t && CLASH.has(x.t + "|" + day + "|" + p + "|" + cid);
+      card.append(lessonRow(p, x.s, x.t, n.d === day && n.state === "in" && n.p === p, bad));
+    });
+  }
+  draw();
+  view.append(dayTabs(day, i => { day = i; draw(); }), card);
+  footBack();
+}
+
+function teacherList() {
+  setHead("مامۆستایان", DIG(TNAMES.length) + " مامۆستا");
+  const s = el('<input class="search" placeholder="ناوەکەت بنووسە" inputmode="search">');
+  const list = el('<div class="list"></div>');
+  const fav = store.get("fav");
+  function draw(q) {
+    list.innerHTML = "";
+    TNAMES.filter(t => !q || t.includes(q)).forEach(t => {
+      const b = el(`<div class="btn tname"><span>${t}</span></div>`);
+      const go_ = el(`<span class="hint">${DIG(TEACH[t].length)} وانە</span>`);
+      const star = el(`<button class="star" aria-pressed="${fav === t}" title="خشتەی من">★</button>`);
+      star.onclick = (e) => {
+        e.stopPropagation();
+        const cur = store.get("fav");
+        if (cur === t) { store.del("fav"); star.setAttribute("aria-pressed", "false"); }
+        else { store.set("fav", t); [...list.querySelectorAll(".star")].forEach(x => x.setAttribute("aria-pressed", "false")); star.setAttribute("aria-pressed", "true"); }
+      };
+      b.append(go_, star);
+      b.onclick = () => go({ v: "teacher", t });
+      list.append(b);
+    });
+    if (!list.children.length) list.append(el('<div class="empty">ئەم ناوە لە خشتەدا نییە.</div>'));
+  }
+  draw("");
+  s.addEventListener("input", () => draw(s.value.trim()));
+  view.append(s, list);
+  footBack();
+}
+
+function teacherView(t) {
+  const lessons = TEACH[t] || [];
+  const daysOn = new Set(lessons.map(x => x.d));
+  setHead(t, DIG(lessons.length) + " وانە لە " + DIG(daysOn.size) + " ڕۆژدا");
+  const fav = store.get("fav");
+  const star = el(`<button class="btn"><span>${fav === t ? "لە «خشتەی من» لای بدە" : "بیکە بە «خشتەی من»"}</span><span class="hint">★</span></button>`);
+  star.onclick = () => { if (store.get("fav") === t) store.del("fav"); else store.set("fav", t); render({ v: "teacher", t }); };
+  view.append(star);
+  const n = nowInfo();
+  DATA.days.forEach((dname, d) => {
+    const mine = lessons.filter(x => x.d === d);
+    view.append(el(`<div class="sum">${dname}${mine.length ? " — " + DIG(mine.length) + " وانە" : ""}</div>`));
+    const card = el('<section class="card"></section>');
+    if (!mine.length) card.append(el('<div class="empty">ئەم ڕۆژە وانەت نییە.</div>'));
+    else {
+      mine.sort((a, b) => a.p - b.p).forEach(x => {
+        const bad = CLASH.has(t + "|" + x.d + "|" + x.p + "|" + x.cls);
+        card.append(lessonRow(x.p, x.s + " — " + x.cls, bad ? "تەزارب: لە هەمان کاتدا لە پۆلێکی تریشدایت" : "", n.d === d && n.state === "in" && n.p === x.p, bad));
+      });
+    }
+    view.append(card);
+  });
+  footBack();
+}
+
+let deferredPrompt = null;
+const standalone = () =>
+  (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true;
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault(); deferredPrompt = e;
+  if (stack.length === 1) render(stack[0]);
+});
+window.addEventListener("appinstalled", () => {
+  deferredPrompt = null;
+  if (stack.length === 1) render(stack[0]);
+});
+function isIOS(){ return /iphone|ipad|ipod/i.test(navigator.userAgent); }
+function addToHome(){
+  if (deferredPrompt) {
+    const p = deferredPrompt; deferredPrompt = null;
+    p.prompt(); p.userChoice.then(() => { if (stack.length === 1) render(stack[0]); });
+    return;
+  }
+  const steps = isIOS()
+    ? ["لە خوارەوەی سەفاری، دوگمەی هاوبەشکردن (چوارگۆشەیەک بە تیرێکی سەرەوە) دابگرە.",
+       "بەرەو خوارەوە بگەڕێ بۆ «Add to Home Screen».",
+       "«Add» لێ بدە."]
+    : ["لە سەرەوەی وێبگەڕەکە، مێنیوی سێ خاڵ (⋮) بکەرەوە.",
+       "«Add to Home screen» یان «Install app» هەڵبژێرە.",
+       "دڵنیای بکەرەوە."];
+  const box = el(`<div class="howto"><div class="sheet">
+    <h3>زیادکردن بۆ شاشەی سەرەکی</h3>
+    <ol>${steps.map(s => "<li>" + s + "</li>").join("")}</ol>
+    <button class="close">تێگەیشتم</button></div></div>`);
+  box.addEventListener("click", e => { if (e.target === box || e.target.classList.contains("close")) box.remove(); });
+  document.body.append(box);
+}
+
+let SYNC = "";
+function applyData(d, when){ DATA = d; reindex(); SYNC = when; render(stack[stack.length - 1]); }
+function syncText(){
+  if (!SYNC) return "خشتەی ناو ئەپەکە — پەیوەندی بە شیتەکەوە نەکرا";
+  const d = new Date(SYNC), two = n => String(n).padStart(2, "0");
+  return "دوایین نوێکردنەوە: " + DIG(two(d.getHours()) + ":" + two(d.getMinutes()));
+}
+function refresh(quiet){
+  const box = document.getElementById("syncline");
+  if (box && !quiet) box.textContent = "نوێ دەکرێتەوە…";
+  fetch(CSV_URL + "&t=" + Date.now(), { cache: "no-store" })
+    .then(r => { if (!r.ok) throw new Error("net"); return r.text(); })
+    .then(txt => {
+      const d = buildFromCSV(txt);
+      const when = new Date().toISOString();
+      store.set("sheet", JSON.stringify({ data: d, when }));
+      applyData(d, when);
+    })
+    .catch(() => { const b = document.getElementById("syncline"); if (b) b.textContent = syncText(); });
+}
+(function boot(){
+  const raw = store.get("sheet");
+  if (raw) { try { const c = JSON.parse(raw); DATA = c.data; SYNC = c.when; reindex(); } catch (e) {} }
+  stack = [{ v: "home" }];
+  render(stack[0]);
+  refresh(true);
+})();
+setInterval(() => { if (stack.length === 1) render(stack[0]); }, 60000);
+
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+}
+</script>
+</body>
+</html>
