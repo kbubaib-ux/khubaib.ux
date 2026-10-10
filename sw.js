@@ -1,4 +1,4 @@
-const CACHE = "khshta-v3";
+const CACHE = "khshta-v4";
 const SHELL = ["./", "./index.html"];
 
 self.addEventListener("install", e => {
