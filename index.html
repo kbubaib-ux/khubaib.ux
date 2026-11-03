@@ -147,6 +147,28 @@ tr.band td.hit{background:var(--bell-soft)}
 .btn.foot .hint{padding:4px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
 .sum{font-family:"Noto Kufi Arabic",sans-serif;font-size:13px;color:var(--muted);margin:2px 2px 10px}
 @media (prefers-reduced-motion:no-preference){.card,.btn{transition:background .12s ease}}
+/* ===== خشتەی تاقیکردنەوەکان ===== */
+.btn.exam{background:var(--bell-soft);border-color:var(--bell)}
+.exsec{font-family:"Noto Kufi Arabic",sans-serif;font-size:15px;font-weight:600;margin:22px 2px 6px;color:var(--brand)}
+.exsel{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;margin:6px 0}
+.duty{display:grid;grid-template-columns:62px 1fr;border-top:1px solid var(--line)}
+.duty:first-child{border-top:0}
+.duty .k{background:var(--wash);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Noto Kufi Arabic",sans-serif;padding:8px 4px;text-align:center}
+.duty .k b{font-size:20px;font-weight:700;line-height:1.2}
+.duty .k span{font-size:10px;color:var(--muted)}
+.duty .m{padding:9px 12px}
+.duty .s{font-family:"Noto Kufi Arabic",sans-serif;font-size:15px;font-weight:600}
+.duty .w{font-size:14px;color:var(--muted)}
+.duty.today{background:var(--bell-soft)}
+.duty.today .k{background:var(--bell);color:#fff}
+.duty.today .k span{color:rgba(255,255,255,.9)}
+.duty.past{opacity:.55}
+.duty.mine .s{color:var(--brand)}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;background:var(--bell);color:#fff;margin-inline-start:6px;font-family:"Noto Kufi Arabic",sans-serif;vertical-align:middle}
+.ex-tbl td.now,.ex-tbl th.now{background:var(--bell-soft)}
+.ex-tbl tbody th{white-space:nowrap}
+.rules{margin:0;padding-inline-start:20px;line-height:1.9;font-size:14px}
+.rules li{margin:2px 0}
 </style>
 </head>
 <body>
@@ -379,6 +401,100 @@ function devPanel() {
 }
 homeEl.addEventListener("click", goHome);
 
+// ===== خشتەی تاقیکردنەوەکان (بەشێکی سەربەخۆ — دەست لە خشتەی وانەکان نادات) =====
+const EXAM = {"title":"نیوەی یەکەمی وەرزی یەکەم","year":"٢٠٢٦ – ٢٠٢٧","dates":[{"d":"2026-11-02","day":"دووشەممە"},{"d":"2026-11-03","day":"سێشەممە"},{"d":"2026-11-04","day":"چوارشەممە"},{"d":"2026-11-05","day":"پێنجشەممە"},{"d":"2026-11-08","day":"یەکشەممە"},{"d":"2026-11-09","day":"دووشەممە"},{"d":"2026-11-10","day":"سێشەممە"},{"d":"2026-11-11","day":"چوارشەممە"},{"d":"2026-11-12","day":"پێنجشەممە"},{"d":"2026-11-15","day":"یەکشەممە"}],"tracks":["10 زانستی","10 وێژەیی","11 زانستی","11 وێژەیی","12 زانستی","12 وێژەیی"],"subj":{"10 زانستی":["بیرکاری","کوردی","عەرەبی","فیزیا","زیندەزانی","ئاین/کۆمپیوتەر","کیمیا","ئینگلیزی","ماف/دەروونناسی",""],"10 وێژەیی":["مێژوو","کوردی","عەرەبی","ئابووری","جوگرافیا","ئاین/کۆمپیوتەر","بیرکاری","ئینگلیزی","ماف/دەروونناسی","کۆمەڵناسی"],"11 زانستی":["بیرکاری","کوردی","ئاین","ئینگلیزی","زیندەزانی","کۆمپیوتەر","کیمیا","فیزیا","عەرەبی",""],"11 وێژەیی":["ئابووری","کوردی","ئاین/فەلسەفە","ئینگلیزی","جوگرافیا","کۆمپیوتەر","مێژوو","بیرکاری","عەرەبی",""],"12 زانستی":["زیندەزانی","ئاین","کیمیا","کوردی","بیرکاری","عەرەبی","فیزیا","ئینگلیزی","",""],"12 وێژەیی":["مێژوو","ئاین","جوگرافیا","کوردی","ئابووری","عەرەبی","بیرکاری","ئینگلیزی","",""]},"rooms":[{"n":1,"tr":"10 وێژەیی","sec":"أ","place":"نهۆمی یەکەم — ژوورەکانی خۆیان"},{"n":2,"tr":"10 وێژەیی","sec":"ب","place":"نهۆمی یەکەم — ژوورەکانی خۆیان"},{"n":3,"tr":"10 وێژەیی","sec":"ج","place":"نهۆمی یەکەم — ژوورەکانی خۆیان"},{"n":4,"tr":"10 زانستی","sec":"أ","place":"نهۆمی یەکەم — ژوورەکانی خۆیان"},{"n":5,"tr":"10 زانستی","sec":"ب","place":"نهۆمی یەکەم — ژوورەکانی خۆیان"},{"n":6,"tr":"10 زانستی","sec":"ج","place":"نهۆمی یەکەم — ژوورەکانی خۆیان"},{"n":7,"tr":"10 زانستی","sec":"أ ب","place":"نهۆمی یەکەم — هۆڵ"},{"n":8,"tr":"10 زانستی","sec":"ب ج","place":"نهۆمی یەکەم — هۆڵ"},{"n":9,"tr":"10 زانستی","sec":"د هـ","place":"نهۆمی یەکەم — هۆڵ"},{"n":10,"tr":"10 زانستی","sec":"د","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":11,"tr":"10 زانستی","sec":"هـ","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":12,"tr":"10 زانستی","sec":"و","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":13,"tr":"12 زانستی","sec":"و","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":14,"tr":"12 زانستی","sec":"أ","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":15,"tr":"12 زانستی","sec":"ب","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":16,"tr":"12 وێژەیی","sec":"أ","place":"ژووری نوێ"},{"n":17,"tr":"12 زانستی","sec":"ج","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":18,"tr":"12 زانستی","sec":"د","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":19,"tr":"11 زانستی","sec":"أ","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":20,"tr":"11 زانستی","sec":"ب","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":21,"tr":"11 زانستی","sec":"ج","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":22,"tr":"11 زانستی","sec":"أ ب ج د هـ","place":"ژووری تایبەت"},{"n":23,"tr":"11 زانستی","sec":"د","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":24,"tr":"11 زانستی","sec":"هـ","place":"نهۆمی دووەم — ژوورەکانی خۆیان"},{"n":25,"tr":"12 زانستی","sec":"هـ","place":"ژووری خۆیان"},{"n":26,"tr":"12 زانستی","sec":"أ ب","place":"تاقیگەی ئەحیا"},{"n":27,"tr":"12 زانستی","sec":"ب ج د","place":"تاقیگەی کیمیا"},{"n":28,"tr":"10 وێژەیی","sec":"أ ب ج","place":"هۆڵی هونەر"},{"n":29,"tr":"12 زانستی","sec":"هـ و","place":"تاقیگەی فیزیا"},{"n":30,"tr":"11 وێژەیی","sec":"أ","place":"نهۆمی سێیەم — ژوورەکانی خۆیان"},{"n":31,"tr":"12 وێژەیی","sec":"أ","place":"نهۆمی سێیەم — ژوورەکانی خۆیان"}],"duty":{"2026-11-02":{"1":"گۆران نوری","2":"احمد","3":"هونەر","4":"زوبێر","5":"محمد","6":"حمید","7":"عرفان","8":"ئەرمەن","9":"عابد","10":"گۆران قادر","11":"بەنان","12":"جهاد","28":"ڕابەر","13":"فەیرۆز","14":"پێشڕەو","15":"عمر","16":"انوەر","17":"احسان","18":"ئاکام","19":"نەریمان","20":"ڕێباز","21":"خەبات","22":"نهرۆ","23":"صباح کریم","24":"ئیدریس","25":"شاهۆ","26":"فریاد","27":"ماجد","29":"محفوظ","30":"اسماعیل","31":"هێمن احمد"},"2026-11-03":{"1":"صباح رووف","2":"ئاشتی","3":"دلاوەر","4":"منصور","5":"جلال","6":"سۆران","7":"عوسمان محمد","8":"ڕاستی","9":"ئەرکان","10":"باست","11":"فتاح","12":"عابد","28":"هێمن علی","13":"اقبال بهاالدین","14":"عوسمان صالح","15":"هیوا","16":"ئەرسەلان","17":"بلال","18":"سعدون","19":"ابراهیم","20":"عبدالله","21":"اسماعیل","22":"خبیب","23":"خەبات","24":"نهرۆ","25":"انوەر","26":"ئەمجەد","27":"فەیرۆز","29":"ماجد","30":"اقبال واحد","31":"وەرزێر"},"2026-11-04":{"1":"عوسمان محمد","2":"گۆران نوری","3":"هێمن علی","4":"عرفان","5":"زوبێر","6":"محمد","7":"ئەرمەن","8":"باست","9":"گۆران قادر","10":"سۆران","11":"جهاد","12":"منصور","28":"هونەر","13":"احسان","14":"هیوا","15":"بلال","16":"عوسمان صالح","17":"صباح کریم","18":"عمر","19":"اقبال بهاالدین","20":"وەرزێر","21":"هێمن احمد","22":"ئەمجەد","23":"ڕێباز","24":"ئەرسەلان","25":"ئاکام","26":"ابراهیم","27":"فریاد","29":"اقبال واحد","30":"عبدالله","31":"سیروان"},"2026-11-05":{"1":"ئەرکان","2":"صباح رووف","3":"حمید","4":"دلاوەر","5":"احمد","6":"بەنان","7":"ڕاستی","8":"جهاد","9":"ڕابەر","10":"عابد","11":"گۆران قادر","12":"هونەر","28":"جلال","13":"عمر","14":"فریاد","15":"پێشڕەو","16":"فەیرۆز","17":"سعدون","18":"شاهۆ","19":"ئیدریس","20":"ابراهیم","21":"صباح کریم","22":"خبیب","23":"عبدالله","24":"نەریمان","25":"ئەمجەد","26":"محفوظ","27":"ئاکام","29":"ئەرسەلان","30":"ڕێباز","31":"انوەر"},"2026-11-08":{"1":"ڕابەر","2":"جلال","3":"صباح رووف","4":"بەنان","5":"فتاح","6":"ئاشتی","7":"دلاوەر","8":"منصور","9":"احمد","10":"عوسمان محمد","11":"باست","12":"محمد","28":"ئەرکان","13":"انوەر","14":"احسان","15":"عوسمان صالح","16":"سیروان","17":"هیوا","18":"ماجد","19":"محفوظ","20":"نەریمان","21":"ئیدریس","22":"خبیب","23":"نهرۆ","24":"اقبال بهاالدین","25":"وەرزێر","26":"سعدون","27":"شاهۆ","29":"پێشڕەو","30":"ئەرسەلان","31":"اقبال واحد"},"2026-11-09":{"1":"حمید","2":"هێمن علی","3":"ئەرکان","4":"گۆران نوری","5":"عرفان","6":"ئەرمەن","7":"زوبێر","8":"سۆران","9":"ڕاستی","10":"ئاشتی","11":"دلاوەر","12":"باست","28":"عوسمان محمد","13":"هیوا","14":"بلال","15":"صباح کریم","16":"اقبال واحد","17":"عمر","18":"فەیرۆز","19":"ئەمجەد","20":"اسماعیل","21":"عوسمان صالح","22":"خبیب","23":"محفوظ","24":"عبدالله","25":"هێمن احمد","26":"ئاکام","27":"سعدون","29":"شاهۆ","30":"خەبات","31":"ئەرسەلان"},"2026-11-10":{"1":"جلال","2":"ڕابەر","3":"احمد","4":"ئاشتی","5":"منصور","6":"عابد","7":"گۆران قادر","8":"هونەر","9":"سۆران","10":"فتاح","11":"هێمن علی","12":"ئەرمەن","28":"صباح رووف","13":"ماجد","14":"وەرزێر","15":"فریاد","16":"هێمن احمد","17":"خەبات","18":"احسان","19":"صباح کریم","20":"فەیرۆز","21":"نهرۆ","22":"ڕێباز","23":"اسماعیل","24":"عمر","25":"ابراهیم","26":"هیوا","27":"عبدالله","29":"سیروان","30":"نەریمان","31":"بلال"},"2026-11-11":{"1":"هێمن علی","2":"هونەر","3":"جلال","4":"محمد","5":"صباح رووف","6":"عرفان","7":"گۆران نوری","8":"زوبێر","9":"دلاوەر","10":"جهاد","11":"عابد","12":"سۆران","28":"حمید","13":"سعدون","14":"شاهۆ","15":"ئاکام","16":"بلال","17":"ئەمجەد","18":"پێشڕەو","19":"وەرزێر","20":"نهرۆ","21":"ڕێباز","22":"خبیب","23":"ئیدریس","24":"خەبات","25":"اقبال واحد","26":"عوسمان صالح","27":"اقبال بهاالدین","29":"احسان","30":"سیروان","31":"فریاد"},"2026-11-12":{"1":"باست","2":"ئەرکان","3":"ئاشتی","4":"ڕاستی","5":"بەنان","6":"فتاح","7":"جهاد","8":"محمد","9":"ئەرمەن","10":"حمید","11":"زوبێر","12":"عرفان","28":"گۆران نوری","19":"سیروان","20":"ئیدریس","21":"محفوظ","22":"اقبال بهاالدین","23":"نەریمان","24":"اسماعیل","30":"هێمن احمد"},"2026-11-15":{"1":"منصور","2":"عوسمان محمد","3":"ڕابەر","28":"بەنان"}},"rules":["تاقیکردنەوەکان کاتژمێر (٨)ی بەیانی دەست پێ دەکەن.","هەر تاقیکردنەوەیەک کەوتە بەر پشووی فەرمی، لە ڕۆژی دواتردا ئەنجام دەدرێت و بە هەمان زنجیرە تاقیکردنەوەکان بەردەوام دەبن.","وەک هەموو ڕۆژە ئاساییەکانی تر، پێویستە خوێندکار پابەندی یەکپۆشی بێت، بە پێچەوانەوە مافی بەشداریکردنی تاقیکردنەوەی نابێت.","پێویستە خوێندکار هەموو پێداویستییەکانی تاقیکردنەوەکەی لەگەڵ خۆی بهێنێت.","پێویستە خوێندکار خۆی بەدوور بگرێت لە گزیکردن.","هێنانی مۆبایل بۆ خوێندنگا بە هەموو شێوەیەک قەدەغەیە."]};
+const EX_LAST_SHOW = "2026-11-17";            // دوای ئەم ڕۆژە دوگمەکە لە سەرەتا دیار نامێنێت
+const exToday = () => { const n = new Date(), two = x => String(x).padStart(2, "0"); return n.getFullYear() + "-" + two(n.getMonth() + 1) + "-" + two(n.getDate()); };
+const exShort = d => DIG(+d.slice(8) + "/" + +d.slice(5, 7));
+const exRoom = n => EXAM.rooms.find(r => r.n === +n);
+const exSubj = (tr, d) => { const i = EXAM.dates.findIndex(x => x.d === d); return i < 0 ? "" : (EXAM.subj[tr] || [])[i] || ""; };
+const EX_NAMES = [...new Set(Object.values(EXAM.duty).flatMap(m => Object.values(m)))].sort((a, b) => a.localeCompare(b, "ckb"));
+function exDutiesOf(t) {
+  const out = [];
+  EXAM.dates.forEach(x => Object.entries(EXAM.duty[x.d] || {}).forEach(([n, who]) => { if (who === t) out.push({ d: x.d, day: x.day, r: exRoom(n) }); }));
+  return out;
+}
+function exShowButton() { return exToday() <= EX_LAST_SHOW; }
+
+function examHomeCard() {
+  const me = store.get("examMe"), today = exToday();
+  if (!me || !EX_NAMES.includes(me)) return null;
+  const x = exDutiesOf(me).find(y => y.d >= today);
+  if (!x) return null;
+  const isToday = x.d === today;
+  const c = el(`<section class="now" style="cursor:pointer"><div class="k">${isToday ? "چاودێریی ئەمڕۆت" : "چاودێریی داهاتووت"} — ${me}</div>
+    <div class="v">کەرتی ${DIG(x.r.n)} · ${DIG(x.r.tr)} ${x.r.sec}</div>
+    <div class="t">${isToday ? "" : x.day + " " + exShort(x.d) + " · "}${x.r.place} · ${exSubj(x.r.tr, x.d)}</div></section>`);
+  c.onclick = () => go({ v: "exams" });
+  return c;
+}
+
+function examView() {
+  setHead("خشتەی تاقیکردنەوەکان", EXAM.title);
+  const today = exToday();
+  let me = store.get("examMe"); if (me && !EX_NAMES.includes(me)) me = "";
+
+  // ١ — چاودێرییەکانی من
+  view.append(el('<div class="exsec">چاودێرییەکانی من</div>'));
+  const sel = el(`<select class="exsel"><option value="">ناوی خۆت هەڵبژێرە…</option>${EX_NAMES.map(t => `<option${t === me ? " selected" : ""}>${t}</option>`).join("")}</select>`);
+  const mineBox = el('<section class="card"></section>');
+  function drawMine() {
+    mineBox.innerHTML = "";
+    if (!me) { mineBox.append(el('<div class="empty">ناوی خۆت هەڵبژێرە بۆ ئەوەی ڕۆژ و کەرتی چاودێرییەکانت ببینیت. ئەپەکە ناوەکەت لە بیر دەمێنێت.</div>')); return; }
+    exDutiesOf(me).forEach(x => {
+      const cls = x.d === today ? "today" : (x.d < today ? "past" : "");
+      mineBox.append(el(`<div class="duty ${cls}"><div class="k"><b>${DIG(x.r.n)}</b><span>کەرت</span></div>
+        <div class="m"><div class="s">${x.day} ${exShort(x.d)}${x.d === today ? '<span class="tag">ئەمڕۆ</span>' : ""}</div>
+        <div class="w">${DIG(x.r.tr)} ${x.r.sec} · ${x.r.place} · ${exSubj(x.r.tr, x.d)}</div></div></div>`));
+    });
+  }
+  sel.onchange = () => { me = sel.value; if (me) store.set("examMe", me); else store.del("examMe"); drawMine(); drawDay(); };
+  drawMine();
+  view.append(sel, mineBox);
+
+  // ٢ — چاودێریی ڕۆژ
+  view.append(el('<div class="exsec">چاودێریی ڕۆژ</div>'));
+  let di = EXAM.dates.findIndex(x => x.d >= today); if (di < 0) di = EXAM.dates.length - 1;
+  const bar = el('<div class="daybar"></div>');
+  EXAM.dates.forEach((x, i) => {
+    const c = el(`<button class="chip" aria-pressed="${i === di}">${x.day} ${exShort(x.d)}</button>`);
+    c.onclick = () => { di = i; [...bar.children].forEach((y, j) => y.setAttribute("aria-pressed", j === i)); drawDay(); };
+    bar.append(c);
+  });
+  const dayBox = el('<section class="card"></section>');
+  function drawDay() {
+    dayBox.innerHTML = "";
+    const d = EXAM.dates[di].d, m = EXAM.duty[d] || {};
+    const list = EXAM.rooms.filter(r => m[r.n]);
+    if (!list.length) { dayBox.append(el('<div class="empty">ئەم ڕۆژە تاقیکردنەوە نییە.</div>')); return; }
+    list.forEach(r => {
+      const mine = me && m[r.n] === me;
+      dayBox.append(el(`<div class="duty ${mine ? "mine today" : ""}"><div class="k"><b>${DIG(r.n)}</b><span>کەرت</span></div>
+        <div class="m"><div class="s">${m[r.n]}${mine ? '<span class="tag">تۆ</span>' : ""}</div>
+        <div class="w">${DIG(r.tr)} ${r.sec} · ${r.place} · ${exSubj(r.tr, d)}</div></div></div>`));
+    });
+  }
+  drawDay();
+  view.append(bar, dayBox);
+
+  // ٣ — خشتەی تاقیکردنەوەی پۆلەکان
+  view.append(el('<div class="exsec">خشتەی تاقیکردنەوەی پۆلەکان</div>'));
+  let h = '<table class="ex-tbl"><thead><tr><th>ڕۆژ و بەروار</th>' + EXAM.tracks.map(t => `<th>${DIG(t)}</th>`).join("") + "</tr></thead><tbody>";
+  EXAM.dates.forEach((x, i) => {
+    const now = x.d === today ? "now" : "";
+    h += `<tr class="${i % 2 ? "band" : ""}"><th>${x.day}<br><span style="font-size:11px">${exShort(x.d)}</span></th>`;
+    EXAM.tracks.forEach(t => h += `<td class="${now}"><span class="s">${EXAM.subj[t][i] || "—"}</span></td>`);
+    h += "</tr>";
+  });
+  view.append(el(`<div class="scroll">${h}</tbody></table></div>`));
+
+  // ڕێنمایی
+  view.append(el('<div class="exsec">ڕێنمایی</div>'));
+  view.append(el(`<section class="card" style="padding:10px 14px"><ol class="rules">${EXAM.rules.map(r => "<li>" + r + "</li>").join("")}</ol></section>`));
+  view.append(el('<p class="note">کاتی تاقیکردنەوەکان بە جەرس لەلایەن ئیدارەوە ڕێک دەخرێت.</p>'));
+  footBack();
+}
+
 function render(st) {
   backEl.hidden = stack.length <= 1;
   homeEl.hidden = stack.length <= 1;
@@ -389,6 +505,7 @@ function render(st) {
   if (st.v === "class") return classView(st.cls);
   if (st.v === "teachers") return teacherList();
   if (st.v === "teacher") return teacherView(st.t);
+  if (st.v === "exams") return examView();
 }
 
 function setHead(t, s) { titleEl.textContent = t; subEl.textContent = s || "٢٠٢٦ – ٢٠٢٧"; }
@@ -417,6 +534,7 @@ function home() {
   view.append(el(`<figure class="hero"><img src="${HERO}" alt="ئامادەیی ئەحمەد موختار جاف">
     <figcaption class="cap"><b>ئامادەیی ئەحمەد موختار جاف</b><span>خشتەی وانەکان — هەڵەبجە</span></figcaption></figure>`));
   view.append(nowCard());
+  const exCard = examHomeCard(); if (exCard) view.append(exCard);
   const fav = store.get("fav");
   const m = el('<nav class="menu"></nav>');
   if (fav && TEACH[fav]) {
@@ -426,6 +544,11 @@ function home() {
     m.append(b);
   }
   m.append(el('<div class="head">خشتەکان</div>'));
+  if (exShowButton()) {
+    const ex = el('<button class="btn exam"><span>خشتەی تاقیکردنەوەکان</span><span class="hint">چاودێری و تاقیکردنەوە</span></button>');
+    ex.onclick = () => go({ v: "exams" });
+    m.append(ex);
+  }
   const a = el('<button class="btn"><span>خشتەی گشتی</span><span class="hint">هەموو پۆلەکان</span></button>');
   a.onclick = () => go({ v: "all" });
   m.append(a);
