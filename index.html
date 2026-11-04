@@ -418,8 +418,16 @@ function exShowButton() { return exToday() <= EX_LAST_SHOW; }
 
 function examHomeCard() {
   const me = store.get("examMe"), today = exToday();
-  if (!me || !EX_NAMES.includes(me)) return null;
-  const x = exDutiesOf(me).find(y => y.d >= today);
+  const active = exNextIndex() >= 0 && exDays(today, EXAM.dates[exNextIndex()].d) <= 3;
+  if (!me || !EX_NAMES.includes(me)) {
+    if (!active) return null;
+    const p = el(`<section class="now" style="cursor:pointer"><div class="k">چاودێرییەکانت</div>
+      <div class="v">ناوی خۆت هەڵبژێرە</div>
+      <div class="t">لێرە دابگرە بۆ بینینی ڕۆژ و کەرتی چاودێرییەکانت</div></section>`);
+    p.onclick = () => go({ v: "exams" });
+    return p;
+  }
+  const x = exDutiesOf(me).find(y => y.d > today || (y.d === today && exMins() < EX_END));
   if (!x) return null;
   const isToday = x.d === today;
   const c = el(`<section class="now" style="cursor:pointer"><div class="k">${isToday ? "چاودێریی ئەمڕۆت" : "چاودێریی داهاتووت"} — ${me}</div>
@@ -520,23 +528,36 @@ function footBack() {
 
 // لە ڕۆژانی تاقیکردنەوەدا، کارتی «ئێستا» باسی تاقیکردنەوە دەکات نەک دەرس
 const EX_ORD = ORD.concat(["نۆیەم","دەیەم","یازدەیەم","دوازدەیەم","سێزدەیەم","چواردەیەم","پازدەیەم"]);
+const EX_START = 8 * 60, EX_END = 10 * 60;   // تاقیکردنەوە ٨:٠٠ دەست پێ دەکات و نزیکەی ١٠:٠٠ بە جەرس کۆتایی دێت
+const exMins = () => { const n = new Date(); return n.getHours() * 60 + n.getMinutes(); };
+const exDays = (a, b) => Math.round((new Date(b + "T12:00:00") - new Date(a + "T12:00:00")) / 864e5);
+// تاقیکردنەوەی داهاتوو: ئەمڕۆ ئەگەر هێشتا تەواو نەبووە، ئەگینا یەکەم ڕۆژی دواتر
+function exNextIndex() {
+  const today = exToday(), m = exMins();
+  return EXAM.dates.findIndex(x => x.d > today || (x.d === today && m < EX_END));
+}
 function examNowCard() {
-  const today = exToday(), i = EXAM.dates.findIndex(x => x.d === today);
-  if (i < 0) return null;
-  const n = new Date(), mins = n.getHours() * 60 + n.getMinutes();
-  const last = (DATA.times[DATA.times.length - 1] || [])[1] || "13:00";
-  const endM = +last.slice(0, 2) * 60 + +last.slice(3);
-  const name = "تاقیکردنەوەی " + (EX_ORD[i] || DIG(i + 1));
-  const day = EXAM.dates[i].day + " " + exShort(today);
-  let k, v = name, t;
-  if (mins < 8 * 60) { k = "تاقیکردنەوەی ئەمڕۆ"; t = "کاتژمێر ٨ی بەیانی دەست پێ دەکات"; }
-  else if (mins < endM) { k = "ئێستا لە تاقیکردنەوەدایە"; t = "دەستپێک کاتژمێر ٨ی بەیانی · کۆتایی بە جەرس"; }
-  else {
-    k = "تاقیکردنەوەی ئەمڕۆ"; v = name + " تەواو بوو";
-    const nx = EXAM.dates[i + 1];
-    t = nx ? "تاقیکردنەوەی داهاتوو: " + nx.day + " " + exShort(nx.d) : "ئەمە دوایین تاقیکردنەوە بوو";
+  const today = exToday(), m = exMins();
+  const i = exNextIndex();
+  const onExamDay = EXAM.dates.some(x => x.d === today);
+  if (i < 0) {
+    if (!onExamDay) return null;
+    return el(`<section class="now"><div class="k">تاقیکردنەوەکان — ${EXAM.title}</div><div class="v">تاقیکردنەوەکان تەواو بوون</div><div class="t">دوایین تاقیکردنەوە ئەمڕۆ ئەنجام درا</div></section>`);
   }
-  return el(`<section class="now"><div class="k">${k} — ${day}</div><div class="v">${v}</div><div class="t">${t}</div></section>`);
+  const x = EXAM.dates[i], gap = exDays(today, x.d);
+  if (gap > 3 && !onExamDay) return null;                 // تەنها لە ماوەی تاقیکردنەوەکاندا
+  const name = "تاقیکردنەوەی " + (EX_ORD[i] || DIG(i + 1));
+  const when = x.day + " " + exShort(x.d);
+  const who = EXAM.tracks.filter(tr => (EXAM.subj[tr] || [])[i]);
+  const only = who.length && who.length < EXAM.tracks.length ? " · تەنها " + who.map(DIG).join("، ") : "";
+  let k, t;
+  if (gap === 0 && m >= EX_START) { k = "ئێستا لە تاقیکردنەوەدایە — " + when; t = "دەستپێک کاتژمێر ٨ی بەیانی · کۆتایی بە جەرس"; }
+  else {
+    k = "تاقیکردنەوەی داهاتوو";
+    const rel = gap === 0 ? "ئەمڕۆ" : gap === 1 ? "سبەینێ" : "";
+    t = (rel ? rel + "، " : "") + when + " · کاتژمێر ٨ی بەیانی دەست پێ دەکات";
+  }
+  return el(`<section class="now"><div class="k">${k}</div><div class="v">${name}</div><div class="t">${t}${only}</div></section>`);
 }
 
 function nowCard() {
