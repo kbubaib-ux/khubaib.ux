@@ -518,7 +518,29 @@ function footBack() {
   view.append(b);
 }
 
+// لە ڕۆژانی تاقیکردنەوەدا، کارتی «ئێستا» باسی تاقیکردنەوە دەکات نەک دەرس
+const EX_ORD = ORD.concat(["نۆیەم","دەیەم","یازدەیەم","دوازدەیەم","سێزدەیەم","چواردەیەم","پازدەیەم"]);
+function examNowCard() {
+  const today = exToday(), i = EXAM.dates.findIndex(x => x.d === today);
+  if (i < 0) return null;
+  const n = new Date(), mins = n.getHours() * 60 + n.getMinutes();
+  const last = (DATA.times[DATA.times.length - 1] || [])[1] || "13:00";
+  const endM = +last.slice(0, 2) * 60 + +last.slice(3);
+  const name = "تاقیکردنەوەی " + (EX_ORD[i] || DIG(i + 1));
+  const day = EXAM.dates[i].day + " " + exShort(today);
+  let k, v = name, t;
+  if (mins < 8 * 60) { k = "تاقیکردنەوەی ئەمڕۆ"; t = "کاتژمێر ٨ی بەیانی دەست پێ دەکات"; }
+  else if (mins < endM) { k = "ئێستا لە تاقیکردنەوەدایە"; t = "دەستپێک کاتژمێر ٨ی بەیانی · کۆتایی بە جەرس"; }
+  else {
+    k = "تاقیکردنەوەی ئەمڕۆ"; v = name + " تەواو بوو";
+    const nx = EXAM.dates[i + 1];
+    t = nx ? "تاقیکردنەوەی داهاتوو: " + nx.day + " " + exShort(nx.d) : "ئەمە دوایین تاقیکردنەوە بوو";
+  }
+  return el(`<section class="now"><div class="k">${k} — ${day}</div><div class="v">${v}</div><div class="t">${t}</div></section>`);
+}
+
 function nowCard() {
+  const ex = examNowCard(); if (ex) return ex;
   const i = nowInfo();
   let k = "ئێستا", v, t = "";
   if (i.d < 0) { v = "ڕۆژی پشوو"; t = "دەوام ڕۆژانی یەکشەممە تا پێنجشەممەیە"; }
